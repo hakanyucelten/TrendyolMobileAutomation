@@ -8,7 +8,7 @@ import util.DriverFactory;
 
 @CucumberOptions(
         features = "src/test/java/features",
-        tags = "@LoginPage",
+        tags = "@TrendyolAutomation",
         glue = {"stepDefs"},
         plugin = {"pretty", "html:target/cucumber-reports.html"},
         monochrome = true
