@@ -9,6 +9,7 @@ import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import util.DriverFactory;
+import util.ElementHelper;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
@@ -16,38 +17,31 @@ import java.time.Duration;
 public class TrendyolStepDefinitions {
     ElementChooser elementChooser = new ElementChooser();
     AppiumDriver<MobileElement> driver = DriverFactory.getDriver();
+    ElementHelper elementHelper = new ElementHelper(driver);
 
     @When("Click to {string} Button")
     public void clickToButton(String buttonName) {
-
         By buttonLocator = elementChooser.getElementByName(buttonName);
-
-        driver.findElement(buttonLocator).click();
+        elementHelper.waitForElementToBeClickable(buttonLocator).click();
+        System.out.println("\033[32m[SUCCESS] Button clicked successfully: " + buttonName + "\033[0m");
     }
- 
+
     @When("Send {string} text to element {string}")
-    public void SendText(String textName,String buttonName) {
-
-        By buttonLocator = elementChooser.getElementByName(buttonName);
-
-        driver.findElement(buttonLocator).sendKeys(textName);
+    public void sendText(String textName, String elementName) {
+        By elementLocator = elementChooser.getElementByName(elementName);
+        elementHelper.waitForElementToBeVisible(elementLocator).sendKeys(textName);
+        System.out.println("\033[32m[SUCCESS] Text sent successfully to: " + elementName + "\033[0m");
     }
-
-//    @When("Click Enter")
-//    public void ClickEnter(String buttonName) {
-//        By buttonLocator = elementChooser.getElementByName(buttonName);
-//       driver.findElement(buttonLocator).sendKeys("\n");
-//    }
 
     @Then("Check to {string} Button is Available in Login Page")
     public void checkToButtonIsAvailableInLoginPage(String buttonName) {
-
         By buttonLocator = elementChooser.getElementByName(buttonName);
-        boolean isVisible = driver.findElement(buttonLocator).isDisplayed();
-        assert isVisible : buttonName + " button is not visible on the login page."; // Assertion to check visibility
+        boolean isVisible = elementHelper.waitForElementToBeVisible(buttonLocator).isDisplayed();
+        assert isVisible : buttonName + " button is not visible on the login page.";
+        System.out.println("\033[32m[SUCCESS] " + buttonName + " button is visible.\033[0m");
     }
 
-    // Scroll down action
+
     @When("Scroll down")
     public void scrollDown() {
         int height = driver.manage().window().getSize().getHeight();
@@ -59,18 +53,26 @@ public class TrendyolStepDefinitions {
                 .moveTo(PointOption.point(width / 2, height / 4))
                 .release()
                 .perform();
+        System.out.println("\033[32m[SUCCESS] Scroll down.\033[0m");
     }
 
     @When("Wait for {int} seconds")
     public void waitForSeconds(int seconds) {
         try {
-            Thread.sleep(seconds * 1000); // Convert seconds to milliseconds
+            Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("\033[32m[SUCCESS] Waited for " + seconds + " seconds.\033[0m");
     }
 
-    // Swipe right action
+    @Then("Press Android Back Button")
+    public void pressAndroidBackButton() {
+        driver.navigate().back();
+        System.out.println("\033[32m[SUCCESS] Back button pressed successfully.\033[0m");
+    }
+
+
     @When("Swipe right")
     public void swipeRight() {
         int height = driver.manage().window().getSize().getHeight();
@@ -82,28 +84,28 @@ public class TrendyolStepDefinitions {
                 .moveTo(PointOption.point(width * 9 / 10, height / 2))
                 .release()
                 .perform();
+        System.out.println("\033[32m[SUCCESS] Swiped right successfully.\033[0m");
     }
-    // Swipe right from a specified element
 
-    // Swipe right action
+
     @When("Swipe right from {string}")
     public void swipeRightFromElement(String startingElementName) {
-        // Get the locator for the starting element using the friendly name
+
         By startingElementLocator = elementChooser.getElementByName(startingElementName);
-        MobileElement startingElement = (MobileElement) driver.findElement(startingElementLocator);
+        MobileElement startingElement = (MobileElement) elementHelper.waitForElementToBeVisible(startingElementLocator);
 
-        // Get the starting position
-        int startX = startingElement.getLocation().getX(); // X coordinate of the starting element
-        int startY = startingElement.getLocation().getY() + (startingElement.getSize().getHeight() / 2); // Center Y coordinate of the starting element
-        int width = driver.manage().window().getSize().getWidth(); // Get the screen width
 
-        // Perform the swipe action
+        int startX = startingElement.getLocation().getX();
+        int startY = startingElement.getLocation().getY() + (startingElement.getSize().getHeight() / 2);
+        int width = driver.manage().window().getSize().getWidth();
+
+
         new TouchAction(driver)
-                .press(PointOption.point(startX, startY)) // Start from the center of the located element
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1))) // Wait for 1 second
-                .moveTo(PointOption.point(width * 9 / 10, startY)) // Move to 90% width from the starting element
+                .press(PointOption.point(startX, startY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(width * 9 / 10, startY))
                 .release()
                 .perform();
+        System.out.println("\033[32m[SUCCESS] Swiped right from " + startingElementName + " successfully.\033[0m");
     }
-
 }
