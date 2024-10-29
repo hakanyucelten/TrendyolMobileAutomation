@@ -24,7 +24,7 @@ public class TrendyolStepDefinitions {
 
         driver.findElement(buttonLocator).click();
     }
-
+ 
     @When("Send {string} text to element {string}")
     public void SendText(String textName,String buttonName) {
 
