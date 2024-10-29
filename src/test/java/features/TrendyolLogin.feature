@@ -14,4 +14,5 @@
       When Click to "AddToBasketButton" Button
       When Scroll down
       When Click to "AnasayfaButton" Button
+      Then Press Android Back Button
 
