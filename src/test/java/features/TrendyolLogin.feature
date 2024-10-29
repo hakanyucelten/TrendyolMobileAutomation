@@ -1,14 +1,17 @@
-@LoginPage
-  Feature: Login Page Test Scenarios
+@TrendyolAutomation
+  Feature: Trendyol Automation Test Scenarios
 
-    @Check
-    Scenario: Check Login Page Components
+    @AddToBasket
+    Scenario: Write text to search bar and send product to basket according to that
       When Click to "TrendyolApp" Button
       When Wait for 3 seconds
+      When Click to "SearchButton" Button
       When Send "gomlek" text to element "SearchButton"
-      When Swipe right from "YemekButton"
+      When Click to "GomlekFromResults" Button
+      When Click to "product1" Button
+      When Click to "AddToBasketButton" Button
+      When Click to "ChooseSize" Button
+      When Click to "AddToBasketButton" Button
       When Scroll down
-      When Click to "SepetimButton" Button
+      When Click to "AnasayfaButton" Button
 
-
-#swipe su an calismiyor duzgun gerisi calisiyor
