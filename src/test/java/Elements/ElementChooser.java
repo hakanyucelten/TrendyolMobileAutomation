@@ -17,6 +17,10 @@ public class ElementChooser {
     By ChooseSize = By.xpath("//android.widget.TextView[@content-desc=\"L Seçili değil\"]\n");
     By YemekButton = MobileBy.xpath("(//android.widget.LinearLayout[@resource-id='trendyol.com:id/layoutSliderBannerItemTitle'])[2]");
     By SearchButton = MobileBy.xpath("//android.widget.EditText[@content-desc='Ara']");
+    By SepetimDeleteButton = MobileBy.xpath("//android.widget.ImageButton[@content-desc='Ürünü sil']");
+    By DeleteOnayButton = MobileBy.xpath("//android.widget.TextView[@resource-id='trendyol.com:id/textViewBasketRemoveAction']");
+    By EmptyBasketMessage = MobileBy.xpath("//android.widget.TextView[@resource-id=\"trendyol.com:id/textViewMessage\"]");
+    By ServicesMessage = MobileBy.xpath("//android.widget.TextView[@resource-id=\"trendyol.com:id/textViewTitle\" and @text=\"Hizmetlerimizi Keşfet\"]");
 
 
 
