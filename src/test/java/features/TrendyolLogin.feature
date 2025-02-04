@@ -16,3 +16,17 @@
       When Click to "AnasayfaButton" Button
       Then Press Android Back Button
 
+
+    @DeleteBasket
+    Scenario: Make basket empty then go to main page to initial step
+      When Click to "SepetimButton" Button
+      When Click to "SepetimDeleteButton" Button
+      When Click to "DeleteOnayButton" Button
+      When Click to "AnasayfaButton" Button
+      When Click to "AnasayfaButton" Button
+      When Click to "ServicesMessage" Button
+
+
+
+
+
