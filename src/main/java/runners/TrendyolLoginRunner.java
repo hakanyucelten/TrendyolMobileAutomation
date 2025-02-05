@@ -10,7 +10,9 @@ import util.DriverFactory;
         features = "src/test/java/features",
         tags = "@TrendyolAutomation",
         glue = {"stepDefs"},
-        plugin = {"pretty", "html:target/cucumber-reports.html"},
+        plugin = {"pretty",
+                "json:target/cucumber-reports/Cucumber.json",
+                "html:target/cucumber-reports/index.html" },
         monochrome = true
 )
 public class TrendyolLoginRunner extends AbstractTestNGCucumberTests {
