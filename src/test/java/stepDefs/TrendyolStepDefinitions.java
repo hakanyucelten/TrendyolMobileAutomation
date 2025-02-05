@@ -8,12 +8,17 @@ import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.annotations.Listeners;
 import util.DriverFactory;
 import util.ElementHelper;
 import org.openqa.selenium.By;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 
+
+@Listeners(io.qameta.allure.testng.AllureTestNg.class)
 public class TrendyolStepDefinitions {
     ElementChooser elementChooser = new ElementChooser();
     AppiumDriver<MobileElement> driver = DriverFactory.getDriver();
@@ -24,6 +29,7 @@ public class TrendyolStepDefinitions {
         By buttonLocator = elementChooser.getElementByName(buttonName);
         elementHelper.waitForElementToBeClickable(buttonLocator).click();
         System.out.println("\033[32m[SUCCESS] Button clicked successfully: " + buttonName + "\033[0m");
+        Allure.addAttachment("Action","Clicked on" + buttonName);
     }
 
     @When("Send {string} text to element {string}")
@@ -31,6 +37,7 @@ public class TrendyolStepDefinitions {
         By elementLocator = elementChooser.getElementByName(elementName);
         elementHelper.waitForElementToBeVisible(elementLocator).sendKeys(textName);
         System.out.println("\033[32m[SUCCESS] Text sent successfully to: " + elementName + "\033[0m");
+        Allure.addAttachment("Action","Sent Text on" + elementName);
     }
 
     @Then("Check to {string} Button is Available in Login Page")
