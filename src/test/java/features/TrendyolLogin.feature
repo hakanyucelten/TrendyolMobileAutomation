@@ -1,6 +1,12 @@
 @TrendyolAutomation
   Feature: Trendyol Automation Test Scenarios
 
+    @AppEntrance
+    Scenario: Open app and wait to see if it is ready to test
+      When Click to "TrendyolApp" Button
+      When Wait for 3 seconds
+      When Check to "SearchButton" Button is Available in Login Page
+      
     @AddToBasket
     Scenario: Write text to search bar and send product to basket according to that
       When Click to "TrendyolApp" Button
